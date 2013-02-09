@@ -1,0 +1,71 @@
+" LEX CHANGES
+" ###########################################################################89
+" If using a dark background within the editing area and syntax highlighting
+" turn on this option as well
+"if has("autocmd")
+"  filetype plugin indent on
+"endif
+
+
+syntax on
+"colorscheme koehler
+colorscheme default
+set background=dark
+set hlsearch    " hilight search pattern
+set ts=4 "number of spaces that tab in file uses.
+set shiftwidth=4
+set expandtab " replace tabs with spaces
+set smarttab " use shiftwidth when inserting <tab>
+set number
+set numberwidth=4
+set autoindent "take indent from previous line.
+set showmatch " Show matching brackets.
+set scrolloff=2 "lines above/below end when scrolling.
+"set columns=87
+"set lines=57
+set ruler "show line/col number in status line.
+"set rulerformat=%55(%{strftime('%a\ %b\ %e\ %I:%M\ %p')}\ %5l,%-6(%c%V%)\ %P%)
+
+" Hilight long lines.
+":au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>79v.\+', -1)
+
+" Hide things in :Explorer view.
+let g:netrw_list_hide= '.*\.swp$,.*\.pyc,.hg/,.*\.db,.*\.class,.hgignore'
+" Shortcut
+" map <F2> :Explore
+" map #2 :Explore
+"
+"highlight LineNr ctermbg=DarkGrey
+"highlight LineNr ctermbg=Grey
+"highlight LineNr ctermbg=Grey ctermfg=Black
+highlight LineNr ctermbg=DarkGrey ctermfg=White
+" show tabs
+"set list
+"set listchars=tab:>-
+
+set cursorline
+"highlight CursorLine ctermbg=DarkGrey cterm=NONE
+"highlight CursorLine ctermbg=Red cterm=NONE
+highlight CursorLine ctermbg=DarkGrey cterm=NONE
+syntax on
+set colorcolumn=80
+
+set backspace=indent,eol,start 
+
+"open at same location as last edit.
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+                         \ exe "normal g'\"" | endif
+
+call pathogen#infect()
+call pathogen#helptags()
+
+let g:indent_guides_start_level=3
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+
+set showbreak=>--->--->--->--->--->--->--->--->--->---
+set linebreak
+
+augroup filetypedetect 
+  au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
+augroup END
