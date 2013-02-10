@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/lexubu/code/processing-config/salt'
+let g:netrw_dirhist_2='/home/lexubu/code/processing-config'
+let g:netrw_dirhist_3='/home/lexubu/code/processing-config/pillar'
+let g:netrw_dirhist_4='/tmp/pandas/pandas/tests'
+let g:netrw_dirhist_5='/tmp/pandas/pandas'
+let g:netrw_dirhist_6='/tmp/pandas/pandas/util'
