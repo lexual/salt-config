@@ -1,4 +1,6 @@
-{% if grains['os'] == 'Debian' %}
+{% if grains['is_dev'] %}
+username: vagrant
+{% elif grains['os'] == 'Debian' %}
 username: lexdeb
 {% elif grains['os'] == 'Ubuntu' %}
 username: lexubu

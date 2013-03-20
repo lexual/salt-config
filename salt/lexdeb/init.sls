@@ -1,5 +1,5 @@
 include:
     - vagrant
-    - desktop
-    - cli
-    - python-dev
+    #- desktop
+    #- cli
+    #- python-dev
