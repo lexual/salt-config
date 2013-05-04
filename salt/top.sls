@@ -5,4 +5,8 @@ base:
         - disco
     'role:desktop':
         - match: grain
-        - lexdeb
+        #- vagrant
+        - desktop
+        - cli
+        - python-dev
+        - r

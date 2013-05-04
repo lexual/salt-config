@@ -1,19 +1,28 @@
+openssh-server:
+  pkg.installed
+
+#firefox-globalmenu:
+#    pkg.removed
+
 desktop-packages:
     pkg.installed:
         - pkgs:
             - xorg
+            - chromium-browser
+            - chromium-codecs-ffmpeg-extra
+            #- firefox
             - openbox
             - gnome-terminal
             - gkrellm
-            - mysql-server-core-5.5  # for kde dependencies issues.
             - gmrun
             - nautilus
             - alsa-utils
             - pavucontrol
             - libreoffice
-            - task-kde-desktop
-            #- task-gnome-desktop
-            #- task-xfce-desktop
+            - vlc
+#            #- task-gnome-desktop
+            - ubuntu-gnome-desktop
+#            #- task-xfce-desktop
             - pm-utils
             - evince
 
@@ -33,62 +42,33 @@ mysql-server-core-5.5:
 python-gpgme:
     pkg.installed
 
-google-chrome-stable:
-    pkg.installed:
-        - require:
-            - file: google-chrome-repo
-
-google-chrome-repo:
-    file.managed:
-        - name: /etc/apt/sources.list.d/google-chrome.list
-        - source: salt://desktop/google-chrome.list
-        - require:
-            - cmd: google-chrome-key
-
-google-chrome-key:
-    cmd.run:
-        - name: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - #&& apt-get update
-        - unless: apt-key list | grep Google
-
+#google-chrome:
+#    pkg.installed:
+#        - name: google-chrome-stable
+#        - require:
+#            - pkgrepo: google-chrome
+#    pkgrepo.managed:
+#        - name: deb http://dl.google.com/linux/chrome/deb/ stable main
+#        - file: /etc/apt/sources.list.d/google-chrome.list
+#        - key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
 
 spotify-client:
     pkg.installed:
         - require:
-            - file: spotify-repo
-
-spotify-repo:
-    file.managed:
-        - name: /etc/apt/sources.list.d/spotify.list
-        - source: salt://desktop/spotify.list
-        - require:
-            - cmd: spotify-key
-
-spotify-key:
-    cmd.run:
-        - name: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59 #&& apt-get update
-        - unless: apt-key list | grep Spotify
-        - require:
-            - file: /etc/apt/sources.list.d/spotify.list
+            - pkgrepo: spotify-client
+    pkgrepo.managed:
+        - name: deb http://repository.spotify.com stable non-free
+        - file: /etc/apt/sources.list.d/spotify.list
+        - keyserver: keyserver.ubuntu.com
+        - keyid: 94558F59
 
 dropbox:
     pkg.installed:
         - require:
-            - cmd: dropbox-key
+            - pkgrepo: dropbox
             - pkg: python-gpgme
-            - file: dropbox-repo
-
-        
-
-dropbox-repo:
-    file.managed:
-        - name: /etc/apt/sources.list.d/dropbox.list
-        - source: salt://desktop/dropbox.list
-        - require:
-            - cmd: dropbox-key
-
-dropbox-key:
-    cmd.run:
-        - name: apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E #&& apt-get update
-        - unless: apt-key list | grep Dropbox
-        - require:
-            - file: /etc/apt/sources.list.d/dropbox.list
+    pkgrepo.managed:
+        - name: deb http://linux.dropbox.com/debian wheezy main
+        - file: /etc/apt/sources.list.d/dropbox.list
+        - keyserver: pgp.mit.edu
+        - keyid: 5044912E

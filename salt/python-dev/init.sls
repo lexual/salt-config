@@ -5,13 +5,19 @@ packages:
             - ipython-notebook
             - virtualenvwrapper
 
-python-pandas:
+pandas:
     pkg.installed:
-{% if grains['os_family'] == 'Debian' %}
+        - name: python-pandas
+{% if grains['os_family'] == 'Debian' and grains['oscodename'] != 'raring' %}
         - require:
             - file: neuro-debian-repo
 
 neuro-debian-repo:
+    pkgrepo.managed:
+        - name: deb http://repository.spotify.com stable non-free
+        - file: /etc/apt/sources.list.d/spotify.list
+        - keyserver: keyserver.ubuntu.com
+        - keyid: 94558F59
     file.managed:
         - name: /etc/apt/sources.list.d/neurodebian.list
         - source: salt://python-dev/neuro-debian.list

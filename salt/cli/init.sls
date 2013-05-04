@@ -10,32 +10,32 @@ cli-packages:
             - mysql-client-5.5
 
 
-sudo group:
-    user.present:
-        - name: {{ pillar['username'] }}
-        - groups:
-            - sudo
-            - {{ pillar['username'] }}
-            - audio
-            - cdrom
-
-/home/{{ pillar['username'] }}/.vimrc:
-    file.managed:
-        - source: salt://cli/vimrc
-        - user: {{ pillar['username'] }}
-        - group: {{ pillar['username'] }}
-
-
-/home/{{ pillar['username'] }}/.vim:
-    file.recurse:
-        - source: salt://cli/vim
-        - user: {{ pillar['username'] }}
-        - group: {{ pillar['username'] }}
-
-#/root/.vimrc:
+#sudo group:
+#    user.present:
+#        - name: {{ pillar['username'] }}
+#        - groups:
+#            - sudo
+#            - {{ pillar['username'] }}
+#            - audio
+#            - cdrom
+#
+#/home/{{ pillar['username'] }}/.vimrc:
 #    file.managed:
 #        - source: salt://cli/vimrc
+#        - user: {{ pillar['username'] }}
+#        - group: {{ pillar['username'] }}
 #
-#/root/.vim:
+#
+#/home/{{ pillar['username'] }}/.vim:
 #    file.recurse:
 #        - source: salt://cli/vim
+#        - user: {{ pillar['username'] }}
+#        - group: {{ pillar['username'] }}
+#
+##/root/.vimrc:
+##    file.managed:
+##        - source: salt://cli/vimrc
+##
+##/root/.vim:
+##    file.recurse:
+##        - source: salt://cli/vim
